@@ -7,5 +7,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :friends
     end
+    namespace :v2 do
+      resources :friends
+      resources :posts
+    end
   end
+
 end

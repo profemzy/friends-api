@@ -64,7 +64,7 @@ jobs:
         with:
           token_format: access_token
           workload_identity_provider: projects/630902729600/locations/global/workloadIdentityPools/my-pool/providers/my-provider
-          service_account: gha-service-account@inputhealth-chr-ops.iam.gserviceaccount.com
+          service_account: gha-service-account@inputhealth-chr-dev.iam.gserviceaccount.com
           access_token_lifetime: 300s
 
       - name: Login to Artifact Registry
@@ -84,5 +84,5 @@ jobs:
         with:
           push: true
           tags: |
-            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-ops/ops-demo/friends-api:${{ steps.get-tag.outputs.short_ref }}
-            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-ops/ops-demo/friends-api:latest
+            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ steps.get-tag.outputs.short_ref }}
+            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:latest

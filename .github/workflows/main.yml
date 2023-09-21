@@ -58,7 +58,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - id: auth
         name: Authenticate with Google Cloud
@@ -94,13 +94,10 @@ jobs:
     needs: docker-release
     runs-on: ubuntu-latest
     steps:
-#      - name: Generate app token
-#        id: cd-gha-app
-#        uses: telus-health-ch/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.8.0 (Jan 26, 2023)
-      - uses: actions/checkout@v3
-        name: Checkout GitOps Repo
+      - name: Checkout GitOps Repo
+        uses: actions/checkout@v3
         with:
-          repository: profemzy/argocd-gitops
+          repository: 'profemzy/argocd-gitops'
           token: ${{ secrets.GIT_PASSWORD }}
       - name: update-image-tag
         shell: bash

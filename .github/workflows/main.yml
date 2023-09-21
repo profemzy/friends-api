@@ -76,7 +76,7 @@ jobs:
 
       - name: Get tag
         id: get-tag
-#        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+        shell: bash
         run: | 
             echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
             echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
@@ -99,6 +99,7 @@ jobs:
         with:
           repository: profemzy/argocd-gitops
       - name: modify-image
+        shell: bash
         run: |
           git config user.email profemzy@gmail.com
           git config user.name Femi

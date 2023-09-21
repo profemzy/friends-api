@@ -104,5 +104,5 @@ jobs:
           git config user.name Femi
           cd helm-charts/friends-api
           cat values.yaml
-          sed -i 's/latest/${{ steps.get-tag.outputs.short_ref }}/g' values.yaml
+          sed -i 's/latest/${{ needs.docker-release.outputs.current_image }}/g' values.yaml
           cat values.yaml

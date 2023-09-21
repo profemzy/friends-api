@@ -46,8 +46,6 @@ jobs:
   docker-release:
     name: Tagged Docker release to Google Artifact Registry
     runs-on: ubuntu-latest
-    outputs:
-      current_image: ${{ steps.get-tag.outputs.short_ref }}
     needs: test
     #    if: github.event_name == 'push' && startsWith(github.ref, 'main')  # <-- Notice that I'm filtering here to only run when a tagged commit is pushed
 
@@ -86,18 +84,5 @@ jobs:
         with:
           push: true
           tags: |
-              northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ steps.get-tag.outputs.short_ref }}
+            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ steps.get-tag.outputs.short_ref }}
             northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:latest
-
-  update-image:
-    needs: docker-release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        name: Clone CD Repo
-        with:
-          repository: "profemzy/friends-api"
-      - run: echo ${{ needs.docker-release.outputs.current_image }}
-        name: Update CD Image
-
-

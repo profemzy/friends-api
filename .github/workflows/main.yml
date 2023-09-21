@@ -79,7 +79,7 @@ jobs:
       - name: Get tag
         id: get-tag
 #        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-        run: echo "{short_ref}={GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - id: docker-push-tagged
         name: Tag Docker image and push to Google Artifact Registry
@@ -87,7 +87,8 @@ jobs:
         with:
           push: true
           tags: |
-            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ steps.get-tag.outputs.short_ref }}
+#            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ steps.get-tag.outputs.short_ref }}
+            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ env.RELEASE_VERSION }}
             northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:latest
 
 #  cd-prep:

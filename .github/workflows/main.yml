@@ -88,3 +88,10 @@ jobs:
           tags: |
             northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ steps.get-tag.outputs.short_ref }}
             northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:latest
+
+  cd-prep:
+    needs: docker-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test fetch image tag
+        run: echo ${{ needs.docker-release.outputs.current_image }}

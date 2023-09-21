@@ -104,5 +104,5 @@ jobs:
           git config user.name Femi
           cd helm-charts/friends-api
           cat values.yaml
-          sed -i 's/latest/${{ env.sha_short }}"/g' values.yaml
+          sed -i 's/latest/${{ env.sha_short }}/g' values.yaml
           cat values.yaml

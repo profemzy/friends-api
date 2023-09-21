@@ -94,14 +94,14 @@ jobs:
     needs: docker-release
     runs-on: ubuntu-latest
     steps:
-      - name: Generate app token
-        id: cd-gha-app
-        uses: telus-health-ch/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.8.0 (Jan 26, 2023)
+#      - name: Generate app token
+#        id: cd-gha-app
+#        uses: telus-health-ch/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.8.0 (Jan 26, 2023)
       - uses: actions/checkout@v3
         name: Checkout GitOps Repo
         with:
           repository: profemzy/argocd-gitops
-          token: ${{ steps.cd-gha-app.outputs.token }}
+          token: ${{ secrets.GIT_PASSWORD }}
       - name: update-image-tag
         shell: bash
         run: |
@@ -110,5 +110,9 @@ jobs:
           cd helm-charts/friends-api
           sed -i 's/latest/${{ needs.docker-release.outputs.current_image }}/g' values.yaml
           cat values.yaml
+          git add .
           git commit -a -m "deploy-${{ needs.docker-release.outputs.current_image }}"
-          git push
+          git push origin main
+        env:
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}

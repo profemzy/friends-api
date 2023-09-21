@@ -98,6 +98,7 @@ jobs:
         name: Test fetch image tag
         with:
           repository: profemzy/argocd-gitops
+      - name: modify-image
         run: |
           git config user.email profemzy@gmail.com
           git config user.name Femi

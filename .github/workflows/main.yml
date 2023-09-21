@@ -46,6 +46,8 @@ jobs:
   docker-release:
     name: Tagged Docker release to Google Artifact Registry
     runs-on: ubuntu-latest
+    outputs:
+      current_image: ${{ steps.get-tag.outputs.short_ref }}
     needs: test
     #    if: github.event_name == 'push' && startsWith(github.ref, 'main')  # <-- Notice that I'm filtering here to only run when a tagged commit is pushed
 
@@ -64,7 +66,7 @@ jobs:
         with:
           token_format: access_token
           workload_identity_provider: projects/222622094445/locations/global/workloadIdentityPools/my-pool/providers/my-provider
-          service_account: gha-service-account@-.iam.gserviceaccount.com
+          service_account: gha-service-account@inputhealth-chr-dev.iam.gserviceaccount.com
           access_token_lifetime: 300s
 
       - name: Login to Artifact Registry

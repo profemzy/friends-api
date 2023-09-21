@@ -87,7 +87,7 @@ jobs:
         with:
           push: true
           tags: |
-            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ env.sha_short }}"
+            northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:${{ env.sha_short }}
             northamerica-northeast1-docker.pkg.dev/inputhealth-chr-dev/ops-demo/friends-api:latest
 
   cd-prep:

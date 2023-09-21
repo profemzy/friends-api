@@ -59,6 +59,8 @@ jobs:
       - id: checkout
         name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_PASSWORD }}
 
       - id: auth
         name: Authenticate with Google Cloud

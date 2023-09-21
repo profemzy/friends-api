@@ -94,5 +94,13 @@ jobs:
     needs: docker-release
     runs-on: ubuntu-latest
     steps:
-      - name: Test fetch image tag
-        run: echo ${{ steps.get-tag.outputs.short_ref }}
+      - uses: actions/checkout@v3
+        name: Test fetch image tag
+        with:
+          repository: profemzy/argocd-gitops
+        run: |
+          git config user.email profemzy@gmail.com
+          git config user.name Femi
+          cd helm-charts/friends-api
+          cat values.yaml
+          echo ${{ steps.get-tag.outputs.short_ref }}

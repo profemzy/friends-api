@@ -104,5 +104,5 @@ jobs:
           git config user.name Femi
           cd helm-charts/friends-api
           cat values.yaml
-          sed -i 's/"latest"/"${{ steps.get-tag.outputs.short_ref }}"' values.yaml
+          sed 's/latest/"${{ steps.get-tag.outputs.short_ref }}"' values.yaml
           cat values.yaml

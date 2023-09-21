@@ -104,6 +104,5 @@ jobs:
           git config user.email profemzy@gmail.com
           git config user.name Femi
           cd helm-charts/friends-api
-          cat ${{ needs.docker-release.outputs.current_image }}
           sed -i 's/latest/${{ needs.docker-release.outputs.current_image }}/g' values.yaml
           cat values.yaml

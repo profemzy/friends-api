@@ -47,7 +47,7 @@ jobs:
     name: Tagged Docker release to Google Artifact Registry
     runs-on: ubuntu-latest
     outputs:
-      current_image: ${{ steps.get-tag.outputs.sha_short }}
+      current_image: ${{ steps.get-tag.outputs.sha_short }}-${{ github.run_number }}
     needs: test
     #    if: github.event_name == 'push' && startsWith(github.ref, 'main')  # <-- Notice that I'm filtering here to only run when a tagged commit is pushed
 
@@ -105,10 +105,10 @@ jobs:
           git config user.email profemzy@gmail.com
           git config user.name Femi
           cd helm-charts/friends-api
-          sed -i 's/latest/${{ needs.docker-release.outputs.current_image }}-${{ github.run_number }}/g' values.yaml
+          sed -i 's/latest/${{ needs.docker-release.outputs.current_image }}/g' values.yaml
           cat values.yaml
           git add .
-          git commit -a -m "deploy-${{ needs.docker-release.outputs.current_image }}-${{ github.run_number }}"
+          git commit -a -m "deploy-${{ needs.docker-release.outputs.current_image }}"
           git push origin main
         env:
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}

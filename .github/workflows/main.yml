@@ -49,8 +49,6 @@ jobs:
     outputs:
       current_image: ${{ steps.get-tag.outputs.sha_short }}
     needs: test
-    #    if: github.event_name == 'push' && startsWith(github.ref, 'main')  # <-- Notice that I'm filtering here to only run when a tagged commit is pushed
-
     permissions:
       contents: 'read'
       id-token: 'write'

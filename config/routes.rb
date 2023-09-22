@@ -8,12 +8,12 @@ Rails.application.routes.draw do
       get "health", to: "welcome#health_check"
       resources :friends
     end
-    # namespace :v2 do
-    #   root "welcome#index"
-    #   get "health", to: "welcome#health_check"
-    #   resources :friends
-    #   resources :posts
-    # end
+    namespace :v2 do
+      root "welcome#index"
+      get "health", to: "welcome#health_check"
+      resources :friends
+      resources :posts
+    end
   end
 
 end

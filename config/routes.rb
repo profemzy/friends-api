@@ -5,10 +5,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       root "welcome#index"
+      get "health", to: "welcome#health_check"
       resources :friends
     end
     namespace :v2 do
       root "welcome#index"
+      get "health", to: "welcome#health_check"
       resources :friends
       resources :posts
     end
